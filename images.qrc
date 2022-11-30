@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>images/bg3.png</file>
+        <file>images/arrow2.png</file>
+    </qresource>
+    <qresource prefix="/qss">
+        <file>css/bookbtn.css</file>
+    </qresource>
+</RCC>
