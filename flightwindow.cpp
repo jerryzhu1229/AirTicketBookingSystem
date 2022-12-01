@@ -48,6 +48,7 @@ void FlightWindow::initFlightWindow(){
     //设置欢迎信息
     QString welmsg=u_name+",您好,欢迎登录航空机票预订系统》》》";
     ui->welMsgLabel->setText(welmsg);
+    ui->welMsgLabel->setStyleSheet("color:#1d4d77");
 
     //初始化城市信息
     initCity();
@@ -131,7 +132,8 @@ ui->stackedWidget->setCurrentWidget(ui->flight_page);
 //点击查看订单按钮
 void FlightWindow::on_orderBtn_clicked()
 {
-ui->stackedWidget->setCurrentWidget(ui->order_page);
+    initorder_page();
+    ui->stackedWidget->setCurrentWidget(ui->order_page);
 }
 
 //点击个人中心按钮
@@ -255,3 +257,23 @@ void FlightWindow::set_menuBtnStyle(){
      ui->myBtn->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
      ui->flightQueryBtn->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
 }
+
+/***********************订单页面相关***************************************/
+
+//初始化订单界面
+void FlightWindow::initorder_page(){
+
+    //设置控件样式
+    ui->orderTabWidget->horizontalHeader()->setStyleSheet("QHeaderView::section{background:rgba(91,155,213,1); color:white}");
+    ui->orderQueryBtn->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->keyLinedit->setStyleSheet("color:#1d4d77; font-size:16px;");
+
+    //初始化订单信息
+
+}
+//查询订单
+void FlightWindow::on_searchpushBtn_clicked()
+{
+
+}
+

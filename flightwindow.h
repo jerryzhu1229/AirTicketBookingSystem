@@ -41,6 +41,9 @@ private slots:
     void book_flight();//预定航班
     void clear_flightTabWidget();//清理航班表格信息
     void set_menuBtnStyle();//设置菜单按钮样式
+
+    void initorder_page();//初始化订单界面
+    void on_searchpushBtn_clicked();//查询全部订单
 };
 
 #endif // FLIGHTWINDOW_H

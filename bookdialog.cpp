@@ -141,10 +141,14 @@ void bookDialog::on_bookpushBtn_clicked()
            order_list << i;
         }
     }
+    if(seat_type.isNull()){
+        QMessageBox::about(NULL, "提示", "请选择舱位类型!");
+    }
     if(order_list.isEmpty())
     {
         QMessageBox::about(NULL, "提示", "请选择乘客!");
     }
+
     for(int i = 0; i < order_list.length(); i++)
     {
        //每次查询一张机票

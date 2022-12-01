@@ -6,9 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1200</width>
+    <width>1250</width>
     <height>650</height>
    </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
@@ -135,20 +140,20 @@
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>260</x>
+     <x>250</x>
      <y>120</y>
-     <width>931</width>
-     <height>461</height>
+     <width>991</width>
+     <height>481</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>2</number>
    </property>
    <widget class="QWidget" name="flight_page">
     <widget class="QComboBox" name="fromCitycomBox">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>50</x>
        <y>30</y>
        <width>141</width>
        <height>41</height>
@@ -163,7 +168,7 @@
     <widget class="QComboBox" name="toCitycomBox">
      <property name="geometry">
       <rect>
-       <x>270</x>
+       <x>290</x>
        <y>30</y>
        <width>141</width>
        <height>41</height>
@@ -178,7 +183,7 @@
     <widget class="QDateEdit" name="dateEdit">
      <property name="geometry">
       <rect>
-       <x>440</x>
+       <x>460</x>
        <y>40</y>
        <width>110</width>
        <height>31</height>
@@ -188,7 +193,7 @@
     <widget class="QPushButton" name="flightQueryBtn">
      <property name="geometry">
       <rect>
-       <x>590</x>
+       <x>610</x>
        <y>40</y>
        <width>141</width>
        <height>31</height>
@@ -209,7 +214,7 @@
     <widget class="QLabel" name="label">
      <property name="geometry">
       <rect>
-       <x>190</x>
+       <x>220</x>
        <y>40</y>
        <width>51</width>
        <height>31</height>
@@ -230,7 +235,7 @@
       <rect>
        <x>0</x>
        <y>80</y>
-       <width>891</width>
+       <width>971</width>
        <height>381</height>
       </rect>
      </property>
@@ -399,21 +404,159 @@
     <property name="enabled">
      <bool>true</bool>
     </property>
-    <widget class="QLabel" name="label_3">
-     <property name="enabled">
-      <bool>true</bool>
-     </property>
+    <widget class="QLineEdit" name="keyLinedit">
      <property name="geometry">
       <rect>
-       <x>190</x>
-       <y>130</y>
-       <width>54</width>
-       <height>16</height>
+       <x>10</x>
+       <y>30</y>
+       <width>531</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="placeholderText">
+      <string>请输入订单编号/航班编号/乘客姓名</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="orderQueryBtn">
+     <property name="geometry">
+      <rect>
+       <x>580</x>
+       <y>43</y>
+       <width>151</width>
+       <height>31</height>
       </rect>
      </property>
      <property name="text">
-      <string>查看订单</string>
+      <string>查询订单</string>
      </property>
+    </widget>
+    <widget class="QTableWidget" name="orderTabWidget">
+     <property name="geometry">
+      <rect>
+       <x>5</x>
+       <y>100</y>
+       <width>961</width>
+       <height>371</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>订单编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>航班编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>座位编号</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>乘客姓名</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>乘客电话</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>出发机场</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>目的机场</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>出发日期</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>出发时间</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>新建列</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>新建列</string>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+     </column>
     </widget>
    </widget>
   </widget>
