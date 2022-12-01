@@ -1,6 +1,6 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
-
+#include "flightwindow.h"
 #include <QByteArray>
 #include <QString>
 #include <QMessageBox>
@@ -128,9 +128,9 @@ void MainWindow::on_login_register_pushButton_clicked()
     //            ac_user_tel = str_tel;
                 QMessageBox::about(NULL, "提示", "登陆成功");
                 this->close();
-//                UserWindow *uw = new UserWindow;
-//                uw->setWindowTitle("用户机票管理");
-//                uw->show();
+                FlightWindow *fw = new FlightWindow;
+                fw->setWindowTitle("用户机票管理");
+                fw->show();
             }
             else
             {

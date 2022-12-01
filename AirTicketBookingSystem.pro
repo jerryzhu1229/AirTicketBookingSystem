@@ -9,17 +9,26 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    MainWindow.cpp \
-    main.cpp
+    bookdialog.cpp \
+    flightwindow.cpp \
+    main.cpp \
+    MainWindow.cpp
 
 HEADERS += \
-    MainWindow.h \
-    database.h
+    bookdialog.h \
+    database.h \
+    flightwindow.h \
+    MainWindow.h
 
 FORMS += \
+    bookdialog.ui \
+    flightwindow.ui \
     MainWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    images.qrc
