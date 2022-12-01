@@ -12,18 +12,18 @@ SOURCES += \
     bookdialog.cpp \
     flightwindow.cpp \
     main.cpp \
-    mainwindow.cpp
+    MainWindow.cpp
 
 HEADERS += \
     bookdialog.h \
     database.h \
     flightwindow.h \
-    mainwindow.h
+    MainWindow.h
 
 FORMS += \
     bookdialog.ui \
     flightwindow.ui \
-    mainwindow.ui
+    MainWindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

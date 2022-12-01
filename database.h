@@ -1,5 +1,30 @@
 #ifndef DATABASE_H
 #define DATABASE_H
+//<<<<<<< HEAD
+
+//#include <QString>
+//#include <QSqlDatabase>
+//#include <QDebug>
+
+
+//bool connectdatabase(const QString &dbName)
+//{
+//    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
+//    db.setHostName("47.108.94.249");
+//    db.setPort(3306);
+//    db.setDatabaseName(dbName);
+//    db.setUserName("root");
+//    db.setPassword("123456");
+
+//    if(!db.open())
+//    {
+//        qDebug()<<"can't connect database!";
+//        return false;
+//    }
+//    return true;
+//}
+
+//=======
 #include <QString>
 #include <QSqlDatabase>
 #include <QSqlError>
@@ -38,4 +63,5 @@ bool connectdatabase(const QString &dbName)
 
     return true;
 }
+//>>>>>>> 62fefdeec43ba766cf96bd0a38c57f0ee768538a
 #endif // DATABASE_H
