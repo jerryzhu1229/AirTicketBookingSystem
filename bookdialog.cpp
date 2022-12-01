@@ -84,19 +84,15 @@ void bookDialog::initBookDialog(){
     ui->best_radioBtn->setText("头等舱/"+best_seat_model.data(best_seat_model.index(0, 3)).toString()+"元");
 
     //初始化乘客信息
+    ui->passgTabWidget->horizontalHeader()->setStretchLastSection(true);                    //使行列头自适应宽度，最后一列将会填充空白部分
+    ui->passgTabWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);     //使行列头自适应宽度，所有列平均分来填充空白部分
+    ui->passgTabWidget->horizontalHeader()->setStyleSheet("QHeaderView::section, QTableCornerButton::section{padding: 1px; border:none; border-bottom: 1px solid rgb(75, 120, 154); border-right: 1px solid rgb(75, 120, 154); border-bottom: 1px solid gray; background-color:rgba(75, 120, 154,1); color:#fff;}");
     QSqlTableModel passenger_model;
     passenger_model.setTable("passger_info");
     passenger_model.setFilter(tr("u1_tel = '%1'").arg(u_tel2));
     passenger_model.select();
+
     int rowcount=passenger_model.rowCount();
-
-    ui->passgTabWidget->horizontalHeader()->setStretchLastSection(true);                    //使行列头自适应宽度，最后一列将会填充空白部分
-    ui->passgTabWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);     //使行列头自适应宽度，所有列平均分来填充空白部分
-
-
-   ui->passgTabWidget->horizontalHeader()->setStyleSheet("QHeaderView::section, QTableCornerButton::section{padding: 1px; border:none; border-bottom: 1px solid rgb(75, 120, 154); border-right: 1px solid rgb(75, 120, 154); border-bottom: 1px solid gray; background-color:rgba(75, 120, 154,1); color:#fff;}");
-
-    // ui->passgTabWidget->setStyleSheet("border:1px solid #1d4d77");
     for(int i = 0 ; i < rowcount; i++)
     {
         p_name = passenger_model.data(passenger_model.index(i, 4)).toString();

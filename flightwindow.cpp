@@ -8,9 +8,9 @@
 #include <QMessageBox>
 #include <QFile>
 //在登录界面初始化这些变量
-QString u_name="Lucy";
-QString u_tel="15730105220";
-QString u_IDCard="8845456561";
+QString u_name;
+QString u_tel;
+QString u_IDCard;
 
 //这是bookDialog要用到的信息
 extern QString u_name2;//预定者姓名

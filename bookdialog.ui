@@ -178,7 +178,7 @@
     </font>
    </property>
    <property name="text">
-    <string>===============================添加乘客==================================</string>
+    <string>===============================选择乘客==================================</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

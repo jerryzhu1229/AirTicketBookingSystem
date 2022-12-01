@@ -10,7 +10,9 @@
 #include <QTextStream>
 #include <stdio.h>
 
-//extern QString ac_user_tel;
+extern QString u_name;
+extern QString u_tel;
+extern QString u_IDCard;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -127,6 +129,10 @@ void MainWindow::on_login_register_pushButton_clicked()
             {
     //            ac_user_tel = str_tel;
                 QMessageBox::about(NULL, "提示", "登陆成功");
+                u_name=model.data(model.index(0, 0)).toString();
+                u_tel=str_tel;
+                u_IDCard=model.data(model.index(0, 1)).toString();
+
                 this->close();
                 FlightWindow *fw = new FlightWindow;
                 fw->setWindowTitle("用户机票管理");
