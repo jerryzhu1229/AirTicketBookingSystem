@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "flightwindow.h"
+#include "adminwindow.h"
 #include <QByteArray>
 #include <QString>
 #include <QMessageBox>
@@ -178,9 +179,9 @@ void MainWindow::on_login_register_pushButton_clicked()
 
                 QMessageBox::about(NULL, "提示", "登陆成功");
                 this->close();
-//                UserWindow *uw = new UserWindow;
-//                uw->setWindowTitle("用户机票管理");
-//                uw->show();
+                AdminWindow *aw = new AdminWindow;
+                aw->setWindowTitle("管理员机票管理");
+                aw->show();
             }
             else
             {

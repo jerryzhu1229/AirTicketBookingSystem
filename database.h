@@ -48,10 +48,10 @@ bool connectdatabase(const QString &dbName)
     QSqlQuery query;
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
     db.setHostName("47.108.94.249");                             //连接数据库主机名，这里需要注意（若填的为”127.0.0.1“，出现不能连接，则改为localhost)
-    db.setPort(3306);                                        //连接数据库端口号，与设置一致
+    db.setPort(3699);                                        //连接数据库端口号，与设置一致
     db.setDatabaseName(dbName);
     db.setUserName("root");                                  //数据库用户名，与设置一致
-    db.setPassword("123456");                                //数据库密码，与设置一致
+    db.setPassword("cquptS2202");                                //数据库密码，与设置一致
 
 
     if(!db.open())

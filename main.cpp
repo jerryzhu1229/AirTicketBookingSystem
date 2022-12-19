@@ -1,4 +1,5 @@
 #include "MainWindow.h"
+#include "adminwindow.h"
 #include <QApplication>
 #include <QMessageBox>
 #include <QTranslator>
@@ -19,8 +20,8 @@ int main(int argc, char *argv[])
         QMessageBox::about(NULL, "提示", "无法连接到数据库");
         return 1;
     }
-
-    MainWindow w;
+    AdminWindow w;
+//    MainWindow w;
     w.setWindowTitle("Air ticket booking system");
     w.show();
 
