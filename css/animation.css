@@ -1,0 +1,22 @@
+QLabel {
+  position: relative;
+  /* 盒子背景宽度将随文字宽度而进行自适应 */
+  width: fit-content;
+  /* 添加动画 */
+  animation: move 4s linear infinite;
+  /* 让前面的几个文字有一个初始的距离，达到更好的呈现效果 */
+  padding-left: 20px;
+}
+QLabel::after {
+  position: absolute;
+  right: -100%;
+  content: attr(text);
+}
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

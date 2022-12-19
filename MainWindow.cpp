@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    //设置窗口图标
+    this->setWindowIcon(QIcon(":/img/images/winicon.png"));
     initMyWindow();
 }
 
