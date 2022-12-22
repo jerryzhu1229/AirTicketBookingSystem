@@ -182,6 +182,7 @@ void AdminWindow::flight_date_que()
                 ui->flightTabWidget_2->setItem(table_row, 10, new QTableWidgetItem(to_port));
                 ui->flightTabWidget_2->setItem(table_row, 11, new QTableWidgetItem(flight_status));
 
+                //读取样式
                 QFile f1;
                 f1.setFileName(":/qss/css/bookbtn.css");
                 f1.open(QIODevice::ReadOnly);
