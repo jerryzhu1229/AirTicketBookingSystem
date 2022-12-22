@@ -1,13 +1,13 @@
-/*预定按钮的样式*/
-QPushButton{
-       margin-top:7px;
-       margin-left:10px;
-       background-color:rgba(29,77,119,0.7);
-       color:white;
-       border-radius:6px
+/*按钮的样式*/
+QPushButton {
+  margin-top: 7px;
+  margin-left: 10px;
+  background-color: rgba(29, 77, 119, 0.7);
+  color: white;
+  border-radius: 6px;
 }
 /*移上去的样式*/
 QPushButton:hover {
-       color:red;
-       font-style:bold;
+  color: red;
+  font-style: bold;
 }

@@ -14,12 +14,15 @@
 extern QString u_name;
 extern QString u_tel;
 extern QString u_IDCard;
+
+extern QString admin_id;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    //设置窗口图标
+    this->setWindowIcon(QIcon(":/img/images/winicon.png"));
     initMyWindow();
 }
 
@@ -179,6 +182,7 @@ void MainWindow::on_login_register_pushButton_clicked()
 
                 QMessageBox::about(NULL, "提示", "登陆成功");
                 this->close();
+                admin_id = str_tel;
                 AdminWindow *aw = new AdminWindow;
                 aw->setWindowTitle("管理员机票管理");
                 aw->show();

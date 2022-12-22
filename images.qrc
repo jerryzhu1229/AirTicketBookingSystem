@@ -2,8 +2,13 @@
     <qresource prefix="/img">
         <file>images/bg3.png</file>
         <file>images/arrow2.png</file>
+        <file>images/icon.png</file>
+        <file>images/winicon.png</file>
     </qresource>
     <qresource prefix="/qss">
         <file>css/bookbtn.css</file>
+        <file>css/menubtn.css</file>
+        <file>css/activebtn.css</file>
+        <file>css/animation.css</file>
     </qresource>
 </RCC>

@@ -8,6 +8,14 @@
 #include <QCryptographicHash>
 #include <QSqlTableModel>
 #include <qDebug>
+#include <QPainter>
+#include <QFile>
+#include <addflightdialog.h>
+
+//在登录界面初始化这些变量
+QString admin_id;
+
+
 AdminWindow::AdminWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::AdminWindow)
@@ -23,6 +31,12 @@ AdminWindow::~AdminWindow()
 
 void AdminWindow::initAdminWindow()
 {
+
+    //设置欢迎信息
+    QString welmsg="管理员"+admin_id+",您好,欢迎使用航空机票预订系统》》》";
+    ui->welMsgLabel->setText(welmsg);
+    ui->welMsgLabel->setStyleSheet("color:#1d4d77");
+
     //初始化航班日期
     if(ui->query_way_comboBox->currentText()=="航班日期")
     {
@@ -36,6 +50,13 @@ void AdminWindow::initAdminWindow()
     QDate local(QDate::currentDate());
     ui->flight_date_dateEdit->setDate(local);
 
+    //设置菜单按钮样式
+    set_menuBtnStyle();
+
+    //设置dateedit显示日历，控制日期显示范围
+    ui->flight_date_dateEdit->setMinimumDate(QDate::currentDate());
+    ui->flight_date_dateEdit->setMaximumDate(QDate::currentDate().addMonths(2));
+    ui->flight_date_dateEdit->setCalendarPopup(true);
     //自动完成列头宽度的自动填充，但是最后一列会补满整个剩余列表
     ui->flightTabWidget_2->horizontalHeader()->setStretchLastSection(true);
     ui->orderTabWidget_3->horizontalHeader()->setStretchLastSection(true);
@@ -45,10 +66,40 @@ void AdminWindow::initAdminWindow()
     ui->orderTabWidget_3->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->passenageTabWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
+
     show_all_flight_info();
 }
-
-
+//设置菜单按钮样式
+void AdminWindow::set_menuBtnStyle(){
+    //设置预定按钮的样式(css文件方式)
+    QFile f1;
+    f1.setFileName(":/qss/css/menubtn.css");
+    f1.open(QIODevice::ReadOnly);
+    QString menubtnQss = f1.readAll();
+    ui->groupBox->setStyleSheet("border:1px solid #1d4d77;");
+    ui->flight_Btn->setStyleSheet(menubtnQss);
+    ui->order_Btn->setStyleSheet(menubtnQss);
+    ui->passenger_Btn->setStyleSheet(menubtnQss);
+    ui->logout_pushButton->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->flightQueryBtn_2->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->flight_info_veritfyBtn_3->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->flight_info_deleteBtn_4->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->flight_info_add_button->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->passenger_info_veritfyBtn_4->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->pasnger_info_que_pushButton->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->flight_info_deleteBtn_5->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->order_que_pushButton->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->order_info_veritfyBtn_5->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    ui->order_info_deleteBtn_6->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+    f1.close();
+}
+//给窗体添加背景图片
+void AdminWindow::paintEvent(QPaintEvent *event)
+{
+    QPainter myPainter(this);
+    myPainter.setOpacity(0.3);          //背景图片透明度
+    myPainter.drawPixmap(0,0,this->width(),this->height(),QPixmap(":/img/images/bg3.png"));
+}
 
 void AdminWindow::on_query_way_comboBox_currentTextChanged(const QString &arg1)
 {
@@ -131,7 +182,29 @@ void AdminWindow::flight_date_que()
                 ui->flightTabWidget_2->setItem(table_row, 10, new QTableWidgetItem(to_port));
                 ui->flightTabWidget_2->setItem(table_row, 11, new QTableWidgetItem(flight_status));
 
-                //设置第一列内容不可以编辑
+                QFile f1;
+                f1.setFileName(":/qss/css/bookbtn.css");
+                f1.open(QIODevice::ReadOnly);
+                QString bookbtnQss = f1.readAll();
+                //添加修改按钮
+                QPushButton *save_alter_Btn = new QPushButton("修改");
+                save_alter_Btn->setObjectName("save_alter_Btn"+ QString::number(i));
+                save_alter_Btn->setFixedSize(90,30);
+                save_alter_Btn->setStyleSheet(bookbtnQss);//添加样式
+                ui->flightTabWidget_2->setCellWidget(i, 12,save_alter_Btn);
+                //设置信号与槽
+                connect(save_alter_Btn,SIGNAL(clicked()),this,SLOT(alter_flight_info()));
+
+                //添加修改按钮
+                QPushButton *save_delete_Btn = new QPushButton("删除");
+                save_delete_Btn->setObjectName("save_delete_Btn"+ QString::number(i));
+                save_delete_Btn->setFixedSize(90,30);
+                save_delete_Btn->setStyleSheet(bookbtnQss);//添加样式
+                ui->flightTabWidget_2->setCellWidget(i, 13,save_delete_Btn);
+                //设置信号与槽
+                connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_flight_info()));
+
+                //设置第一列flight_code内容不可以编辑
                 ui->flightTabWidget_2->item(i,1)->setFlags(ui->flightTabWidget_2->item(i,1)->flags() & (~Qt::ItemIsEditable));
 
             }
@@ -146,6 +219,11 @@ void AdminWindow::flight_num_que()
 {
     ui->flightTabWidget_2->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     if (ui->query_way_comboBox->currentText()=="航班号") {
+        QFile f1;
+        f1.setFileName(":/qss/css/bookbtn.css");
+        f1.open(QIODevice::ReadOnly);
+        QString bookbtnQss = f1.readAll();
+
         QString flight_num = ui->flight_num_lineEdit->text();
         if (flight_num.isEmpty()) {
             QMessageBox::warning(NULL, "提示", "请输入航班号!");
@@ -192,8 +270,28 @@ void AdminWindow::flight_num_que()
                 ui->flightTabWidget_2->setItem(table_row, 9, new QTableWidgetItem(from_port));
                 ui->flightTabWidget_2->setItem(table_row, 10, new QTableWidgetItem(to_port));
                 ui->flightTabWidget_2->setItem(table_row, 11, new QTableWidgetItem(flight_status));
+                QFile f1;
+                f1.setFileName(":/qss/css/bookbtn.css");
+                f1.open(QIODevice::ReadOnly);
+                QString bookbtnQss = f1.readAll();
+                //添加修改按钮
+                QPushButton *save_alter_Btn = new QPushButton("修改");
+                save_alter_Btn->setObjectName("save_alter_Btn"+ QString::number(0));
+                save_alter_Btn->setFixedSize(90,30);
+                save_alter_Btn->setStyleSheet(bookbtnQss);//添加样式
+                ui->flightTabWidget_2->setCellWidget(0, 12,save_alter_Btn);
+                //设置信号与槽
+                connect(save_alter_Btn,SIGNAL(clicked()),this,SLOT(alter_flight_info()));
 
-                //设置第一列内容不可以编辑
+                //添加修改按钮
+                QPushButton *save_delete_Btn = new QPushButton("删除");
+                save_delete_Btn->setObjectName("save_delete_Btn"+ QString::number(0));
+                save_delete_Btn->setFixedSize(90,30);
+                save_delete_Btn->setStyleSheet(bookbtnQss);//添加样式
+                ui->flightTabWidget_2->setCellWidget(0, 13,save_delete_Btn);
+                //设置信号与槽
+                connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_flight_info()));
+                //设置第一列flight_code内容不可以编辑
                 ui->flightTabWidget_2->item(0,1)->setFlags(ui->flightTabWidget_2->item(0,1)->flags() & (~Qt::ItemIsEditable));
 
             } else {
@@ -211,7 +309,51 @@ void AdminWindow::on_flightQueryBtn_2_clicked()
     flight_date_que();
     flight_num_que();
 }
+//航班信息修改 单个
+void AdminWindow::alter_flight_info()
+{
+    int row=ui->flightTabWidget_2->currentRow();//获取当前行
+    QString s_flight_code = ui->flightTabWidget_2->item(row,1)->text();
+    QString s_plane_code = ui->flightTabWidget_2->item(row,2)->text();
+    QString s_ecomy_price = ui->flightTabWidget_2->item(row,3)->text();
+    QString s_start_date = ui->flightTabWidget_2->item(row,4)->text();
+    QString s_start_time = ui->flightTabWidget_2->item(row,5)->text();
+    QString s_arrive_time = ui->flightTabWidget_2->item(row,6)->text();
+    QString s_from_city = ui->flightTabWidget_2->item(row,7)->text();
+    QString s_to_city = ui->flightTabWidget_2->item(row,8)->text();
+    QString s_from_port = ui->flightTabWidget_2->item(row,9)->text();
+    QString s_to_port = ui->flightTabWidget_2->item(row,10)->text();
+    QString s_flight_status = ui->flightTabWidget_2->item(row,11)->text();
+    if(s_plane_code.isEmpty()||s_ecomy_price.isEmpty()||s_start_date.isEmpty()||s_start_time.isEmpty()||
+            s_arrive_time.isEmpty()||s_from_city.isEmpty()||s_to_city.isEmpty()||s_from_port.isEmpty()||
+            s_to_port.isEmpty()||s_flight_status.isEmpty()){
+        QMessageBox::about(NULL, "提示", "请填写完整信息!");
+    }else{
+        QMessageBox::StandardButton box;
+        box = QMessageBox::question(this, "提示", "确定要修改吗?", QMessageBox::Yes|QMessageBox::No);
+        if(box==QMessageBox::No)
+            return;
+        else{
+           QString str = QString("update flight_info set plane_code='%1', ecomy_price='%2', start_date='%3', start_time='%4', arrive_time='%5', from_city='%6', to_city='%7', from_port='%8', to_port='%9', flight_status='%10' where flight_code='%11'")
+                   .arg(s_plane_code).arg(s_ecomy_price).arg(s_start_date).arg(s_start_time).arg(s_arrive_time).arg(s_from_city).arg(s_to_city).arg(s_from_port).arg(s_to_port).arg(s_flight_status).arg(s_flight_code);
 
+           QSqlQuery query;
+           if(query.exec(str))
+           {
+               QMessageBox::about(NULL, "提示", QString("修改航班%1成功!").arg(ui->flightTabWidget_2->item(row, 1)->text()));
+           }
+           else
+           {
+               QMessageBox::warning(NULL, "提示", QString("修改航班%1失败!").arg(ui->flightTabWidget_2->item(row, 1)->text()));
+           }
+        }
+    }
+    if(!ui->flight_num_lineEdit->text().isEmpty()) {
+        flight_num_que();
+    } else {
+        show_all_flight_info();
+    }
+}
 //航班信息修改
 void AdminWindow::on_flight_info_veritfyBtn_3_clicked()
 {
@@ -282,10 +424,54 @@ void AdminWindow::on_flight_info_veritfyBtn_3_clicked()
             QMessageBox::about(NULL, "提示", "您已取消航班修改!");
         }
     }
-    flight_date_que();
-    flight_num_que();
+    if(!ui->flight_num_lineEdit->text().isEmpty()) {
+        flight_num_que();
+    } else {
+        show_all_flight_info();
+    }
 }
+//航班信息删除 单个
+void AdminWindow::delete_flight_info()
+{
+    int row=ui->flightTabWidget_2->currentRow();//获取当前行
+    QString s_flight_code = ui->flightTabWidget_2->item(row,1)->text();
+    QMessageBox::StandardButton box;
+    box = QMessageBox::question(this, "提示", "确定要修改吗?", QMessageBox::Yes|QMessageBox::No);
+    if(box==QMessageBox::No)
+        return;
+    else{
+        QSqlTableModel flight_info_model;
+        flight_info_model.setTable("flight_info");
+        flight_info_model.setFilter(tr("flight_code = '%1'").arg(s_flight_code));
+        flight_info_model.select();
 
+        int rowCount = flight_info_model.rowCount();
+        if (rowCount ==1 ) {
+            //删除航班表
+            QString str1 = QString("delete from flight_info where flight_code='%1'").arg(s_flight_code);
+            QSqlQuery query1;
+            //删除ticket表
+            QString str2 = QString("delete from ticket_info where flight_code='%1'").arg(s_flight_code);
+            QSqlQuery query2;
+            //删除order表
+            QString str3 = QString("delete from order_info where flight_code='%1'").arg(s_flight_code);
+            QSqlQuery query3;
+            if(query1.exec(str1) && query2.exec(str2) && query3.exec(str3))
+            {
+                QMessageBox::about(NULL, "提示", QString("删除航班%1成功!").arg(ui->flightTabWidget_2->item(row, 1)->text()));
+            }
+            else
+            {
+                QMessageBox::warning(NULL, "提示", QString("删除航班%1失败!").arg(ui->flightTabWidget_2->item(row, 1)->text()));
+            }
+        }
+    }
+    if(!ui->flight_num_lineEdit->text().isEmpty()) {
+        flight_num_que();
+    } else {
+        show_all_flight_info();
+    }
+}
 //航班信息删除
 void AdminWindow::on_flight_info_deleteBtn_4_clicked()
 {
@@ -313,14 +499,21 @@ void AdminWindow::on_flight_info_deleteBtn_4_clicked()
 
                 int rowCount = flight_info_model.rowCount();
                 if (rowCount ==1 ) {
-
-                    QString str = QString("delete from flight_info where flight_code='%1'").arg(verifty_flight_code);
-
-                    QSqlQuery query;
-                    if(query.exec(str))
+                    //删除航班表
+                    QString str1 = QString("delete from flight_info where flight_code='%1'").arg(verifty_flight_code);
+                    QSqlQuery query1;
+                    //删除ticket表
+                    QString str2 = QString("delete from ticket_info where flight_code='%1'").arg(verifty_flight_code);
+                    QSqlQuery query2;
+                    //删除order表
+                    QString str3 = QString("delete from order_info where flight_code='%1'").arg(verifty_flight_code);
+                    QSqlQuery query3;
+                    if(query1.exec(str1) && query2.exec(str2) && query3.exec(str3))
                     {
+
                         QMessageBox::about(NULL, "提示", QString("删除航班%1成功!").arg(ui->flightTabWidget_2->item(info_list.at(i), 1)->text()));
                         ui->flightTabWidget_2->item(info_list.at(i), 0)->setCheckState(Qt::Unchecked);
+
                     }
                     else
                     {
@@ -334,8 +527,11 @@ void AdminWindow::on_flight_info_deleteBtn_4_clicked()
             QMessageBox::about(NULL, "提示", "您已取消航班删除!");
         }
     }
-    flight_date_que();
-    flight_num_que();
+    if(!ui->flight_num_lineEdit->text().isEmpty()) {
+        flight_num_que();
+    } else {
+        show_all_flight_info();
+    }
 }
 
 // 显示所有航班信息
@@ -381,7 +577,27 @@ void AdminWindow::show_all_flight_info()
         ui->flightTabWidget_2->setItem(table_row, 10, new QTableWidgetItem(to_port));
         ui->flightTabWidget_2->setItem(table_row, 11, new QTableWidgetItem(flight_status));
 
-        //设置第一列内容不可以编辑
+        QFile f1;
+        f1.setFileName(":/qss/css/bookbtn.css");
+        f1.open(QIODevice::ReadOnly);
+        QString bookbtnQss = f1.readAll();
+        //添加修改按钮
+        QPushButton *save_alter_Btn = new QPushButton("修改");
+        save_alter_Btn->setObjectName("save_alter_Btn"+ QString::number(i));
+        save_alter_Btn->setFixedSize(90,30);
+        save_alter_Btn->setStyleSheet(bookbtnQss);//添加样式
+        ui->flightTabWidget_2->setCellWidget(i, 12,save_alter_Btn);
+        //设置信号与槽
+        connect(save_alter_Btn,SIGNAL(clicked()),this,SLOT(alter_flight_info()));
+        //添加修改按钮
+        QPushButton *save_delete_Btn = new QPushButton("删除");
+        save_delete_Btn->setObjectName("save_delete_Btn"+ QString::number(i));
+        save_delete_Btn->setFixedSize(90,30);
+        save_delete_Btn->setStyleSheet(bookbtnQss);//添加样式
+        ui->flightTabWidget_2->setCellWidget(i, 13,save_delete_Btn);
+        //设置信号与槽
+        connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_flight_info()));
+        //设置第一列flight_code内容不可以编辑
         ui->flightTabWidget_2->item(0,1)->setFlags(ui->flightTabWidget_2->item(0,1)->flags() & (~Qt::ItemIsEditable));
 
     }
@@ -417,6 +633,27 @@ void AdminWindow::show_all_passenage_info()
         ui->passenageTabWidget->setItem(table_row, 2, new QTableWidgetItem(user_code));
         ui->passenageTabWidget->setItem(table_row, 3, new QTableWidgetItem(user_tel));
         ui->passenageTabWidget->setItem(table_row, 4, new QTableWidgetItem(user_pwd));
+        QFile f1;
+        f1.setFileName(":/qss/css/bookbtn.css");
+        f1.open(QIODevice::ReadOnly);
+        QString bookbtnQss = f1.readAll();
+        //添加修改按钮
+        QPushButton *save_alter_Btn = new QPushButton("修改");
+        save_alter_Btn->setObjectName("save_alter_Btn"+ QString::number(i));
+        save_alter_Btn->setFixedSize(90,30);
+        save_alter_Btn->setStyleSheet(bookbtnQss);//添加样式
+        ui->passenageTabWidget->setCellWidget(i, 5,save_alter_Btn);
+        //设置信号与槽
+        connect(save_alter_Btn,SIGNAL(clicked()),this,SLOT(alter_passger_info()));
+
+        //添加删除按钮
+        QPushButton *save_delete_Btn = new QPushButton("删除");
+        save_delete_Btn->setObjectName("save_delete_Btn"+ QString::number(i));
+        save_delete_Btn->setFixedSize(90,30);
+        save_delete_Btn->setStyleSheet(bookbtnQss);//添加样式
+        ui->passenageTabWidget->setCellWidget(i, 6,save_delete_Btn);
+        //设置信号与槽
+        connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_passger_info()));
         //设置第三列内容不可以编辑
         ui->passenageTabWidget->item(0,3)->setFlags(ui->passenageTabWidget->item(0,3)->flags() & (~Qt::ItemIsEditable));
     }
@@ -461,7 +698,27 @@ void AdminWindow::show_all_order_info()
         ui->orderTabWidget_3->setItem(table_row, 7, new QTableWidgetItem(order_status));
         ui->orderTabWidget_3->setItem(table_row, 8, new QTableWidgetItem(create_time));
 
+        QFile f1;
+        f1.setFileName(":/qss/css/bookbtn.css");
+        f1.open(QIODevice::ReadOnly);
+        QString bookbtnQss = f1.readAll();
+        //添加修改按钮
+        QPushButton *save_alter_Btn = new QPushButton("修改");
+        save_alter_Btn->setObjectName("save_alter_Btn"+ QString::number(i));
+        save_alter_Btn->setFixedSize(90,30);
+        save_alter_Btn->setStyleSheet(bookbtnQss);//添加样式
+        ui->orderTabWidget_3->setCellWidget(i, 9,save_alter_Btn);
+        //设置信号与槽
+        connect(save_alter_Btn,SIGNAL(clicked()),this,SLOT(alter_order_info()));
 
+        //添加删除按钮
+        QPushButton *save_delete_Btn = new QPushButton("删除");
+        save_delete_Btn->setObjectName("save_delete_Btn"+ QString::number(i));
+        save_delete_Btn->setFixedSize(90,30);
+        save_delete_Btn->setStyleSheet(bookbtnQss);//添加样式
+        ui->orderTabWidget_3->setCellWidget(i, 10,save_delete_Btn);
+        //设置信号与槽
+        connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_order_info()));
         //设置第一列内容不可以编辑
         ui->orderTabWidget_3->item(0,1)->setFlags(ui->orderTabWidget_3->item(0,1)->flags() & (~Qt::ItemIsEditable));
     }
@@ -480,7 +737,7 @@ void AdminWindow::on_passenger_Btn_clicked()
     show_all_passenage_info();
 }
 
-//显示所有用户信息
+//显示所有订单信息
 void AdminWindow::on_order_Btn_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->order_page_2);
@@ -490,6 +747,7 @@ void AdminWindow::on_order_Btn_clicked()
 //用户信息查询
 void AdminWindow::on_pasnger_info_que_pushButton_clicked()
 {
+    ui->stackedWidget->setCurrentWidget(ui->passenageTabWidget);
     passenage_tel_que();
 }
 
@@ -527,6 +785,29 @@ void AdminWindow::passenage_tel_que()
             ui->passenageTabWidget->setItem(table_row, 2, new QTableWidgetItem(user_code));
             ui->passenageTabWidget->setItem(table_row, 3, new QTableWidgetItem(user_tel));
             ui->passenageTabWidget->setItem(table_row, 4, new QTableWidgetItem(user_pwd));
+
+            QFile f1;
+            f1.setFileName(":/qss/css/bookbtn.css");
+            f1.open(QIODevice::ReadOnly);
+            QString bookbtnQss = f1.readAll();
+            //添加修改按钮
+            QPushButton *save_alter_Btn = new QPushButton("修改");
+            save_alter_Btn->setObjectName("save_alter_Btn"+ QString::number(0));
+            save_alter_Btn->setFixedSize(90,30);
+            save_alter_Btn->setStyleSheet(bookbtnQss);//添加样式
+            ui->passenageTabWidget->setCellWidget(0, 5,save_alter_Btn);
+            //设置信号与槽
+            connect(save_alter_Btn,SIGNAL(clicked()),this,SLOT(alter_passger_info()));
+
+            //添加删除按钮
+            QPushButton *save_delete_Btn = new QPushButton("删除");
+            save_delete_Btn->setObjectName("save_delete_Btn"+ QString::number(0));
+            save_delete_Btn->setFixedSize(90,30);
+            save_delete_Btn->setStyleSheet(bookbtnQss);//添加样式
+            ui->passenageTabWidget->setCellWidget(0, 6,save_delete_Btn);
+            //设置信号与槽
+            connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_passger_info()));
+
             //设置第三列内容不可以编辑
             ui->passenageTabWidget->item(0,3)->setFlags(ui->passenageTabWidget->item(0,3)->flags() & (~Qt::ItemIsEditable));
 
@@ -538,7 +819,52 @@ void AdminWindow::passenage_tel_que()
         }
     }
 }
+//旅客信息修改 单
+void AdminWindow::alter_passger_info()
+{
+    int row=ui->passenageTabWidget->currentRow();//获取当前行
+    QString s_user_name = ui->passenageTabWidget->item(row,1)->text();
+    QString s_user_code = ui->passenageTabWidget->item(row,2)->text();
+    QString s_user_tel = ui->passenageTabWidget->item(row,3)->text();
+    QString s_user_pwd = ui->passenageTabWidget->item(row,4)->text();
 
+    if(s_user_name.isEmpty()||s_user_code.isEmpty()||s_user_tel.isEmpty()||s_user_pwd.isEmpty()){
+        QMessageBox::about(NULL, "提示", "请填写完整信息!");
+    }else{
+        QMessageBox::StandardButton box;
+        box = QMessageBox::question(this, "提示", "确定要修改吗?", QMessageBox::Yes|QMessageBox::No);
+        if(box==QMessageBox::No)
+            return;
+        else{
+            QString str_password = ui->passenageTabWidget->item(row,4)->text();
+            QByteArray byte_password = str_password.toLatin1();
+            QByteArray byte_password_md5 = QCryptographicHash::hash(byte_password,QCryptographicHash::Md5);
+            QString strPwdMd5 = byte_password_md5.toHex();
+            QByteArray b_password_md5 = strPwdMd5.toLatin1();
+            char * c_password_md5 = b_password_md5.data();
+            QString str = QString("update user_info set u_name='%1', u_IDCard='%2', u_pwd='%3' where u_tel='%4'")
+                    .arg(s_user_name).arg(s_user_code).arg(c_password_md5).arg(s_user_tel);
+
+            QSqlQuery query;
+            if(query.exec(str))
+            {
+                QMessageBox::about(NULL, "提示", QString("修改用户%1信息成功!").arg(ui->passenageTabWidget->item(row, 1)->text()));
+                ui->passenageTabWidget->item(row, 0)->setCheckState(Qt::Unchecked);
+
+            }
+            else
+            {
+                QMessageBox::warning(NULL, "提示", QString("修改用户%1失败!").arg(ui->passenageTabWidget->item(row, 1)->text()));
+            }
+        }
+    }
+    if (!ui->tel_num_lineEdit->text().isEmpty()) {
+        passenage_tel_que();
+
+    } else {
+        show_all_passenage_info();
+    }
+}
 //旅客信息修改
 void AdminWindow::on_passenger_info_veritfyBtn_4_clicked()
 {
@@ -589,6 +915,7 @@ void AdminWindow::on_passenger_info_veritfyBtn_4_clicked()
                     {
                         QMessageBox::about(NULL, "提示", QString("修改用户%1信息成功!").arg(ui->passenageTabWidget->item(info_list.at(i), 1)->text()));
                         ui->passenageTabWidget->item(info_list.at(i), 0)->setCheckState(Qt::Unchecked);
+
                     }
                     else
                     {
@@ -602,9 +929,78 @@ void AdminWindow::on_passenger_info_veritfyBtn_4_clicked()
             QMessageBox::about(NULL, "提示", "您已取消旅客信息修改!");
         }
     }
-    passenage_tel_que();
-}
+    if (!ui->tel_num_lineEdit->text().isEmpty()) {
+        passenage_tel_que();
 
+    } else {
+        show_all_passenage_info();
+    }
+}
+//用户信息删除 单
+void AdminWindow::delete_passger_info()
+{
+    int row=ui->passenageTabWidget->currentRow();//获取当前行
+    QString s_user_name = ui->passenageTabWidget->item(row,1)->text();
+    QString s_user_code = ui->passenageTabWidget->item(row,2)->text();
+    QString s_user_tel = ui->passenageTabWidget->item(row,3)->text();
+    QString s_user_pwd = ui->passenageTabWidget->item(row,4)->text();
+
+    if(s_user_name.isEmpty()||s_user_code.isEmpty()||s_user_tel.isEmpty()||s_user_pwd.isEmpty()){
+        QMessageBox::about(NULL, "提示", "请填写完整信息!");
+    }else{
+        QMessageBox::StandardButton box;
+        box = QMessageBox::question(this, "提示", "确定要修改吗?", QMessageBox::Yes|QMessageBox::No);
+        if(box==QMessageBox::No)
+            return;
+        else{
+
+            QByteArray byte_verifty_u_IDCard = ui->passenageTabWidget->item(row,2)->text().toUtf8();
+            char *verifty_u_IDCard = byte_verifty_u_IDCard.data();
+            QSqlTableModel flight_info_model;
+            flight_info_model.setTable("user_info");
+            flight_info_model.setFilter(tr("u_tel = '%1'").arg(ui->passenageTabWidget->item(row,3)->text()));
+            flight_info_model.select();
+
+            int rowCount = flight_info_model.rowCount();
+            if (rowCount ==1 ) {
+                //删除user
+                QString str1 = QString("delete from user_info where u_tel='%1'").arg(s_user_tel);
+                QSqlQuery query1;
+
+                //删除passger
+                QString str2 = QString("delete from passger_info where u1_tel='%1'").arg(s_user_tel);
+                QSqlQuery query2;
+
+                //删除order
+                QString str3 = QString("delete from order_info where passger_tel='%1'").arg(s_user_tel);
+                QSqlQuery query3;
+
+                //修改ticket表
+                QString str4 = QString("update ticket_info set passger_IDCard='0' where passger_IDCard='%1'").arg(verifty_u_IDCard);
+                QSqlQuery query4;
+                if(query1.exec(str1) && query2.exec(str2))
+                {
+                    QMessageBox::about(NULL, "提示", QString("删除用户%1信息成功!").arg(ui->passenageTabWidget->item(row, 1)->text()));
+                    ui->passenageTabWidget->item(row, 0)->setCheckState(Qt::Unchecked);
+                    query3.exec(str3);
+                    query4.exec(str4);
+                    ui->stackedWidget->setCurrentWidget(ui->passenage_page_2);
+
+                }
+                else
+                {
+                    QMessageBox::warning(NULL, "提示", QString("删除用户%1失败!").arg(ui->passenageTabWidget->item(row, 1)->text()));
+                }
+            }
+        }
+    }
+    if (!ui->tel_num_lineEdit->text().isEmpty()) {
+        passenage_tel_que();
+
+    } else {
+        show_all_passenage_info();
+    }
+}
 //用户信息删除
 void AdminWindow::on_flight_info_deleteBtn_5_clicked()
 {
@@ -625,6 +1021,8 @@ void AdminWindow::on_flight_info_deleteBtn_5_clicked()
                 byte_verifty_user_tel = ui->passenageTabWidget->item(info_list.at(i),3)->text().toUtf8();
                 verifty_user_tel = byte_verifty_user_tel.data();
 
+                QByteArray byte_verifty_u_IDCard = ui->passenageTabWidget->item(info_list.at(i),2)->text().toUtf8();
+                char *verifty_u_IDCard = byte_verifty_u_IDCard.data();
                 QSqlTableModel flight_info_model;
                 flight_info_model.setTable("user_info");
                 flight_info_model.setFilter(tr("u_tel = '%1'").arg(ui->passenageTabWidget->item(info_list.at(i),3)->text()));
@@ -632,15 +1030,29 @@ void AdminWindow::on_flight_info_deleteBtn_5_clicked()
 
                 int rowCount = flight_info_model.rowCount();
                 if (rowCount ==1 ) {
+                    //删除user
+                    QString str1 = QString("delete from user_info where u_tel='%1'").arg(verifty_user_tel);
+                    QSqlQuery query1;
 
-                    QString str = QString("delete from user_info where u_tel='%1'")
-                            .arg(verifty_user_tel);
+                    //删除passger
+                    QString str2 = QString("delete from passger_info where u1_tel='%1'").arg(verifty_user_tel);
+                    QSqlQuery query2;
 
-                    QSqlQuery query;
-                    if(query.exec(str))
+                    //删除order
+                    QString str3 = QString("delete from order_info where passger_tel='%1'").arg(verifty_user_tel);
+                    QSqlQuery query3;
+
+                    //修改ticket表
+                    QString str4 = QString("update ticket_info set passger_IDCard='0' where passger_IDCard='%1'").arg(verifty_u_IDCard);
+                    QSqlQuery query4;
+                    if(query1.exec(str1) && query2.exec(str2))
                     {
                         QMessageBox::about(NULL, "提示", QString("删除用户%1信息成功!").arg(ui->passenageTabWidget->item(info_list.at(i), 1)->text()));
                         ui->passenageTabWidget->item(info_list.at(i), 0)->setCheckState(Qt::Unchecked);
+                        query3.exec(str3);
+                        query4.exec(str4);
+                        ui->stackedWidget->setCurrentWidget(ui->passenage_page_2);
+
                     }
                     else
                     {
@@ -654,7 +1066,13 @@ void AdminWindow::on_flight_info_deleteBtn_5_clicked()
             QMessageBox::about(NULL, "提示", "您已取消旅客信息修改!");
         }
     }
-    passenage_tel_que();
+    if (!ui->tel_num_lineEdit->text().isEmpty()) {
+        passenage_tel_que();
+
+    }  else {
+        show_all_passenage_info();
+
+    }
 }
 
 //订单查询
@@ -703,6 +1121,27 @@ void AdminWindow::order_que()
             ui->orderTabWidget_3->setItem(table_row, 7, new QTableWidgetItem(order_status));
             ui->orderTabWidget_3->setItem(table_row, 8, new QTableWidgetItem(create_time));
 
+            QFile f1;
+            f1.setFileName(":/qss/css/bookbtn.css");
+            f1.open(QIODevice::ReadOnly);
+            QString bookbtnQss = f1.readAll();
+            //添加修改按钮
+            QPushButton *save_alter_Btn = new QPushButton("修改");
+            save_alter_Btn->setObjectName("save_alter_Btn"+ QString::number(0));
+            save_alter_Btn->setFixedSize(90,30);
+            save_alter_Btn->setStyleSheet(bookbtnQss);//添加样式
+            ui->orderTabWidget_3->setCellWidget(0, 9,save_alter_Btn);
+            //设置信号与槽
+            connect(save_alter_Btn,SIGNAL(clicked()),this,SLOT(alter_order_info()));
+
+            //添加删除按钮
+            QPushButton *save_delete_Btn = new QPushButton("删除");
+            save_delete_Btn->setObjectName("save_delete_Btn"+ QString::number(0));
+            save_delete_Btn->setFixedSize(90,30);
+            save_delete_Btn->setStyleSheet(bookbtnQss);//添加样式
+            ui->orderTabWidget_3->setCellWidget(0, 10,save_delete_Btn);
+            //设置信号与槽
+            connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_order_info()));
 
             //设置第一列内容不可以编辑
             ui->orderTabWidget_3->item(0,1)->setFlags(ui->orderTabWidget_3->item(0,1)->flags() & (~Qt::ItemIsEditable));
@@ -721,7 +1160,52 @@ void AdminWindow::on_order_que_pushButton_clicked()
     order_que();
 }
 
+//订单修改 单
+void AdminWindow::alter_order_info()
+{
+    int row=ui->orderTabWidget_3->currentRow();//获取当前行
+    QString s_order_code = ui->orderTabWidget_3->item(row,1)->text();
+    QString s_flight_code = ui->orderTabWidget_3->item(row,2)->text();
+    QString s_seat_code = ui->orderTabWidget_3->item(row,3)->text();
+    QString s_booku_tel = ui->orderTabWidget_3->item(row,4)->text();
+    QString s_passger_tel = ui->orderTabWidget_3->item(row,5)->text();
+    QString s_order_total = ui->orderTabWidget_3->item(row,6)->text();
+    QString s_order_status = ui->orderTabWidget_3->item(row,7)->text();
+    QString s_create_time = ui->orderTabWidget_3->item(row,8)->text();
 
+    if(s_order_code.isEmpty()||s_flight_code.isEmpty()||s_seat_code.isEmpty()||s_booku_tel.isEmpty()||
+            s_passger_tel.isEmpty()||s_order_total.isEmpty()||s_order_status.isEmpty()||s_create_time.isEmpty()){
+        QMessageBox::about(NULL, "提示", "请填写完整信息!");
+    }else{
+        QMessageBox::StandardButton box;
+        box = QMessageBox::question(this, "提示", "确定要修改吗?", QMessageBox::Yes|QMessageBox::No);
+        if(box==QMessageBox::No)
+            return;
+        else{
+            QString str = QString("update order_info set flight_code='%1', seat_code='%2', booku_tel='%3', passger_tel='%4', order_total='%5', order_status='%6', create_time='%7' where order_code='%8'")
+                    .arg(s_flight_code,s_seat_code,s_booku_tel,s_passger_tel,s_order_total,s_order_status,s_create_time,s_order_code);
+//                    QString str = QString("update order_info set flight_code='%1', seat_code='%2'where order_code='%3'")
+//                            .arg(verifty_flight_code,verifty_seat_code,verifty_order_code);
+
+            QSqlQuery query;
+            qDebug() << query.exec(str);
+            query.exec(str);
+            if(query.exec(str))
+            {
+                QMessageBox::about(NULL, "提示", QString("修改订单信息成功!"));
+            }
+            else
+            {
+                QMessageBox::warning(NULL, "提示", QString("修改订单失败!"));
+            }
+        }
+    }
+    if (!ui->order_num_lineEdit->text().isEmpty()) {
+        order_que();
+    } else {
+        show_all_order_info();
+    }
+}
 //订单修改
 void AdminWindow::on_order_info_veritfyBtn_5_clicked()
 {
@@ -780,6 +1264,7 @@ void AdminWindow::on_order_info_veritfyBtn_5_clicked()
                     {
                         QMessageBox::about(NULL, "提示", QString("修改订单信息成功!"));
                         ui->orderTabWidget_3->item(info_list.at(i), 0)->setCheckState(Qt::Unchecked);
+
                     }
                     else
                     {
@@ -793,10 +1278,72 @@ void AdminWindow::on_order_info_veritfyBtn_5_clicked()
             QMessageBox::about(NULL, "提示", "您已取消订单信息修改!");
         }
     }
-//    order_que();
+    if (!ui->order_num_lineEdit->text().isEmpty()) {
+        order_que();
+    } else {
+        show_all_order_info();
+    }
 }
+//订单删除 单
+void AdminWindow::delete_order_info()
+{
+    int row=ui->passenageTabWidget->currentRow();//获取当前行
+    QString s_order_code = ui->orderTabWidget_3->item(row,1)->text();
+    QString s_flight_code = ui->orderTabWidget_3->item(row,2)->text();
+    QString s_seat_code = ui->orderTabWidget_3->item(row,3)->text();
+    QString s_booku_tel = ui->orderTabWidget_3->item(row,4)->text();
+    QString s_passger_tel = ui->orderTabWidget_3->item(row,5)->text();
+    QString s_order_total = ui->orderTabWidget_3->item(row,6)->text();
+    QString s_order_status = ui->orderTabWidget_3->item(row,7)->text();
+    QString s_create_time = ui->orderTabWidget_3->item(row,8)->text();
 
+    if(s_order_code.isEmpty()||s_flight_code.isEmpty()||s_seat_code.isEmpty()||s_booku_tel.isEmpty()||
+            s_passger_tel.isEmpty()||s_order_total.isEmpty()||s_order_status.isEmpty()||s_create_time.isEmpty()){
+        QMessageBox::about(NULL, "提示", "请填写完整信息!");
+    }else{
+        QMessageBox::StandardButton box;
+        box = QMessageBox::question(this, "提示", "确定要修改吗?", QMessageBox::Yes|QMessageBox::No);
+        if(box==QMessageBox::No)
+            return;
+        else{
 
+            QSqlTableModel order_info_model;
+            order_info_model.setTable("order_info");
+            order_info_model.setFilter(tr("order_code = '%1'").arg(ui->orderTabWidget_3->item(row,1)->text()));
+            order_info_model.select();
+
+            int rowCount = order_info_model.rowCount();
+            if (rowCount ==1 ) {
+                //删除order表
+                QString str1 = QString("delete from order_info where order_code='%1'")
+                        .arg(s_order_code);
+                QSqlQuery query1;
+                qDebug()<<str1;
+
+                //修改ticket表
+                QString str2 = QString("update ticket_info set passger_IDCard='0' where flight_code='%1' and seat_code='%2'").arg(s_flight_code,s_seat_code);
+                QSqlQuery query2;
+                qDebug()<<str2;
+//                    if(query2.exec(str2))
+                if(query1.exec(str1) && query2.exec(str2))
+                {
+                    QMessageBox::about(NULL, "提示", QString("删除订单%1信息成功!").arg(ui->orderTabWidget_3->item(row, 1)->text()));
+                    ui->stackedWidget->setCurrentWidget(ui->order_page_2);
+                }
+                else
+                {
+                    QMessageBox::warning(NULL, "提示", QString("删除订单%1失败!").arg(ui->orderTabWidget_3->item(row, 1)->text()));
+                }
+            }
+        }
+    }
+    if (!ui->order_num_lineEdit->text().isEmpty()) {
+        order_que();
+    } else {
+        show_all_order_info();
+    }
+}
+//订单删除
 void AdminWindow::on_order_info_deleteBtn_6_clicked()
 {
     QList<int> info_list;
@@ -815,7 +1362,10 @@ void AdminWindow::on_order_info_deleteBtn_6_clicked()
             for (int i=0; i<info_list.length(); ++i) {
                 byte_verifty_order_code = ui->orderTabWidget_3->item(info_list.at(i),1)->text().toUtf8();
                 verifty_order_code = byte_verifty_order_code.data();
-
+                QByteArray byte_verifty_flight_code = ui->orderTabWidget_3->item(info_list.at(i),2)->text().toUtf8();
+                char * verifty_flight_code = byte_verifty_flight_code.data();
+                QByteArray byte_verifty_seat_code = ui->orderTabWidget_3->item(info_list.at(i),3)->text().toUtf8();
+                char * verifty_seat_code = byte_verifty_seat_code.data();
                 QSqlTableModel order_info_model;
                 order_info_model.setTable("order_info");
                 order_info_model.setFilter(tr("order_code = '%1'").arg(ui->orderTabWidget_3->item(info_list.at(i),1)->text()));
@@ -823,15 +1373,23 @@ void AdminWindow::on_order_info_deleteBtn_6_clicked()
 
                 int rowCount = order_info_model.rowCount();
                 if (rowCount ==1 ) {
-
-                    QString str = QString("delete from order_info where order_code='%1'")
+                    //删除order表
+                    QString str1 = QString("delete from order_info where order_code='%1'")
                             .arg(verifty_order_code);
+                    QSqlQuery query1;
+                    qDebug()<<str1;
 
-                    QSqlQuery query;
-                    if(query.exec(str))
+                    //修改ticket表
+                    QString str2 = QString("update ticket_info set passger_IDCard='0' where flight_code='%1' and seat_code='%2'").arg(verifty_flight_code,verifty_seat_code);
+                    QSqlQuery query2;
+                    qDebug()<<str2;
+//                    if(query2.exec(str2))
+                    if(query1.exec(str1) && query2.exec(str2))
                     {
                         QMessageBox::about(NULL, "提示", QString("删除订单%1信息成功!").arg(ui->orderTabWidget_3->item(info_list.at(i), 1)->text()));
                         ui->orderTabWidget_3->item(info_list.at(i), 0)->setCheckState(Qt::Unchecked);
+                        ui->stackedWidget->setCurrentWidget(ui->order_page_2);
+
                     }
                     else
                     {
@@ -845,7 +1403,11 @@ void AdminWindow::on_order_info_deleteBtn_6_clicked()
             QMessageBox::about(NULL, "提示", "您已取消订单信息修改!");
         }
     }
-    order_que();
+    if (!ui->order_num_lineEdit->text().isEmpty()) {
+        order_que();
+    } else {
+        show_all_order_info();
+    }
 }
 
 
@@ -858,5 +1420,15 @@ void AdminWindow::on_logout_pushButton_clicked()
         mw->setWindowTitle("航空机票预订系统");
         mw->show();
     }
+}
+
+
+void AdminWindow::on_flight_info_add_button_clicked()
+{
+    //弹出对话框
+    addflightdialog add_flight;
+    add_flight.setWindowTitle("填写航班信息");
+    add_flight.setModal(false);
+    add_flight.exec();
 }
 

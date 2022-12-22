@@ -23,6 +23,10 @@ private slots:
 
     void on_flightQueryBtn_2_clicked();
 
+    void paintEvent(QPaintEvent *event);  //为窗体添加背景图片
+
+    void set_menuBtnStyle();
+
     void clear_flight_info_table();
 
     void clear_passenage_info_table();
@@ -45,6 +49,18 @@ private slots:
 
     void on_flight_info_veritfyBtn_3_clicked();
 
+    void alter_flight_info();
+
+    void delete_flight_info();
+
+    void alter_passger_info();
+
+    void delete_passger_info();
+
+    void alter_order_info();
+
+    void delete_order_info();
+
     void on_flight_info_deleteBtn_4_clicked();
 
     void on_flight_Btn_clicked();
@@ -66,6 +82,8 @@ private slots:
     void on_order_info_deleteBtn_6_clicked();
 
     void on_logout_pushButton_clicked();
+
+    void on_flight_info_add_button_clicked();
 
 private:
     Ui::AdminWindow *ui;

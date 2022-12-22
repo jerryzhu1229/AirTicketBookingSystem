@@ -41,6 +41,7 @@ private slots:
     void initBookDialog();//初始化对话框
     void on_bookpushBtn_clicked();  //预定
     void on_cancelBtn_clicked();   //退出
+
 };
 
 #endif // BOOKDIALOG_H
