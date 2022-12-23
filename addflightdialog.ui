@@ -10,6 +10,11 @@
     <height>425</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>11</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
@@ -25,6 +30,11 @@
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
       <property name="text">
        <string>航班号：</string>
       </property>
@@ -84,54 +94,104 @@
      <height>181</height>
     </rect>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="0">
-     <widget class="QLabel" name="label_7">
-      <property name="text">
-       <string>机型编号：</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_6">
-      <property name="text">
-       <string>目的城市</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLabel" name="label_8">
-      <property name="text">
-       <string>目的机场：</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_9">
-      <property name="text">
-       <string>出发时间</string>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="1">
-     <widget class="QComboBox" name="comboBox"/>
-    </item>
-    <item row="3" column="1">
-     <widget class="QTimeEdit" name="start_time_timeEdit"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="to_city_comboBox"/>
-    </item>
-    <item row="2" column="1">
-     <widget class="QComboBox" name="to_port_comboBox"/>
-    </item>
-   </layout>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>18</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>机型编号：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>57</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目的城市</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>96</y>
+      <width>60</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>目的机场：</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>135</y>
+      <width>71</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>出发时间</string>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="comboBox">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>20</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="to_city_comboBox">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>60</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QComboBox" name="to_port_comboBox">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>90</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTimeEdit" name="start_time_timeEdit">
+    <property name="geometry">
+     <rect>
+      <x>80</x>
+      <y>130</y>
+      <width>161</width>
+      <height>24</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QWidget" name="widget_3" native="true">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>250</y>
+     <y>240</y>
      <width>251</width>
      <height>131</height>
     </rect>
@@ -172,8 +232,8 @@
   <widget class="QWidget" name="widget_4" native="true">
    <property name="geometry">
     <rect>
-     <x>280</x>
-     <y>250</y>
+     <x>270</x>
+     <y>240</y>
      <width>251</width>
      <height>131</height>
     </rect>
@@ -183,6 +243,9 @@
      <widget class="QLabel" name="label_13">
       <property name="text">
        <string>元          数量：</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignJustify|Qt::AlignVCenter</set>
       </property>
      </widget>
     </item>
@@ -222,7 +285,7 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>11</pointsize>
+     <pointsize>15</pointsize>
     </font>
    </property>
    <property name="text">
@@ -233,10 +296,15 @@
    <property name="geometry">
     <rect>
      <x>240</x>
-     <y>380</y>
-     <width>93</width>
-     <height>29</height>
+     <y>378</y>
+     <width>111</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
    </property>
    <property name="text">
     <string>确定添加</string>

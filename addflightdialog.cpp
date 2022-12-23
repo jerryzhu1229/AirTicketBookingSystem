@@ -171,7 +171,7 @@ void addflightdialog::initaddflightdialog(){
     f1.setFileName(":/qss/css/menubtn.css");
     f1.open(QIODevice::ReadOnly);
     QString menubtnQss = f1.readAll();
-     ui->pushButton->setStyleSheet("border:1px dotted #1d4d77; border-radius:15px; background-color:rgba(91,155,213,1); color:white");
+     ui->pushButton->setStyleSheet("border:1px dotted #1d4d77; background-color:rgba(91,155,213,1); color:white");
     f1.close();
 }
 //初始化机型

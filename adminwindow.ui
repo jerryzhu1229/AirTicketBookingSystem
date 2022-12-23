@@ -36,28 +36,28 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>230</x>
       <y>100</y>
-      <width>1101</width>
+      <width>1001</width>
       <height>501</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="flight_page_2">
      <widget class="QTableWidget" name="flightTabWidget_2">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>120</y>
-        <width>1101</width>
+        <x>10</x>
+        <y>100</y>
+        <width>961</width>
         <height>371</height>
        </rect>
       </property>
       <property name="font">
        <font>
-        <pointsize>10</pointsize>
+        <pointsize>9</pointsize>
        </font>
       </property>
       <column>
@@ -71,7 +71,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
        <property name="background">
@@ -88,7 +88,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -106,7 +106,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
         </font>
        </property>
       </column>
@@ -116,7 +116,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -127,7 +127,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -138,7 +138,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -149,7 +149,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -160,7 +160,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -171,7 +171,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -182,7 +182,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -193,7 +193,7 @@
        </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>11</pointsize>
          <bold>false</bold>
         </font>
        </property>
@@ -212,153 +212,240 @@
      <widget class="QWidget" name="widget" native="true">
       <property name="geometry">
        <rect>
-        <x>200</x>
-        <y>0</y>
+        <x>10</x>
+        <y>20</y>
         <width>511</width>
-        <height>111</height>
+        <height>91</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="1">
-        <widget class="QComboBox" name="query_way_comboBox">
-         <item>
-          <property name="text">
-           <string>航班日期</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>航班号</string>
-          </property>
-         </item>
-        </widget>
+      <widget class="QComboBox" name="query_way_comboBox">
+       <property name="geometry">
+        <rect>
+         <x>110</x>
+         <y>40</y>
+         <width>77</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>航班日期</string>
+        </property>
        </item>
-       <item row="0" column="2">
-        <widget class="QWidget" name="widget_2" native="true">
-         <layout class="QGridLayout" name="gridLayout_2">
-          <item row="0" column="0">
-           <widget class="QLabel" name="flight_date_label">
-            <property name="font">
-             <font>
-              <family>Microsoft YaHei UI</family>
-              <pointsize>11</pointsize>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <property name="text">
-             <string>航班日期：</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QDateEdit" name="flight_date_dateEdit"/>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="flight_num_label">
-            <property name="font">
-             <font>
-              <family>Microsoft YaHei UI</family>
-              <pointsize>11</pointsize>
-              <bold>false</bold>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true"/>
-            </property>
-            <property name="text">
-             <string>航班号：</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="flight_num_lineEdit"/>
-          </item>
-         </layout>
-        </widget>
+       <item>
+        <property name="text">
+         <string>航班号</string>
+        </property>
        </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="query_way_label">
-         <property name="text">
-          <string>航班查询方式：</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      </widget>
+      <widget class="QWidget" name="widget_2" native="true">
+       <property name="geometry">
+        <rect>
+         <x>295</x>
+         <y>10</y>
+         <width>207</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <widget class="QDateEdit" name="flight_date_dateEdit">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>181</width>
+          <height>24</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="flight_num_lineEdit">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>181</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QLabel" name="query_way_label">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>40</y>
+         <width>105</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei UI</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>航班查询方式：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="flight_date_label">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>40</y>
+         <width>75</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei UI</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>航班日期：</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="flight_num_label">
+       <property name="geometry">
+        <rect>
+         <x>230</x>
+         <y>40</y>
+         <width>60</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei UI</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>航班号：</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="widget_3" native="true">
       <property name="geometry">
        <rect>
-        <x>830</x>
-        <y>0</y>
-        <width>281</width>
-        <height>121</height>
+        <x>690</x>
+        <y>-10</y>
+        <width>291</width>
+        <height>111</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_4">
-       <item row="0" column="0">
-        <widget class="QLabel" name="flight_info_label_2">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>航班信息操作：</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="flight_info_deleteBtn_4">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string>删除航班</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="flight_info_veritfyBtn_3">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string>修改航班</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QPushButton" name="flight_info_add_button">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>增加航班</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QLabel" name="flight_info_label_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>20</y>
+         <width>112</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei UI</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>航班信息操作：</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="flight_info_deleteBtn_4">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>50</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>批量删除</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="flight_info_veritfyBtn_3">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>20</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>批量修改</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="flight_info_add_button">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>80</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>增加航班</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QLabel" name="flightque_label">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>30</y>
+        <x>10</x>
+        <y>0</y>
         <width>201</width>
         <height>51</height>
        </rect>
@@ -378,9 +465,9 @@
      <widget class="QPushButton" name="flightQueryBtn_2">
       <property name="geometry">
        <rect>
-        <x>710</x>
-        <y>36</y>
-        <width>97</width>
+        <x>510</x>
+        <y>50</y>
+        <width>141</width>
         <height>41</height>
        </rect>
       </property>
@@ -405,7 +492,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>20</y>
+        <y>10</y>
         <width>201</width>
         <height>41</height>
        </rect>
@@ -425,8 +512,8 @@
      <widget class="QWidget" name="widget_4" native="true">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>10</y>
+        <x>20</x>
+        <y>30</y>
         <width>341</width>
         <height>71</height>
        </rect>
@@ -437,7 +524,7 @@
          <property name="font">
           <font>
            <family>Microsoft YaHei UI</family>
-           <pointsize>14</pointsize>
+           <pointsize>11</pointsize>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -893,63 +980,85 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
      <widget class="QWidget" name="widget_5" native="true">
       <property name="geometry">
        <rect>
-        <x>780</x>
-        <y>80</y>
+        <x>480</x>
+        <y>-20</y>
         <width>311</width>
         <height>111</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_6">
-       <item row="0" column="0">
-        <widget class="QLabel" name="passenger_info_label_3">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>用户信息操作：</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="passenger_info_veritfyBtn_4">
-         <property name="font">
-          <font>
-           <pointsize>13</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string>修改用户</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="flight_info_deleteBtn_5">
-         <property name="font">
-          <font>
-           <pointsize>13</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string>删除用户</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QPushButton" name="flight_info_deleteBtn_5">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>70</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>批量删除</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="passenger_info_veritfyBtn_4">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>40</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>批量修改</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="passenger_info_label_3">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>40</y>
+         <width>112</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei UI</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>用户信息操作：</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QPushButton" name="pasnger_info_que_pushButton">
       <property name="geometry">
        <rect>
-        <x>660</x>
-        <y>20</y>
-        <width>101</width>
+        <x>360</x>
+        <y>40</y>
+        <width>141</width>
         <height>41</height>
        </rect>
       </property>
@@ -962,7 +1071,7 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>查询</string>
+       <string>用户查询</string>
       </property>
      </widget>
     </widget>
@@ -974,7 +1083,7 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>29</y>
+        <y>10</y>
         <width>221</width>
         <height>41</height>
        </rect>
@@ -997,8 +1106,8 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
      <widget class="QWidget" name="widget_6" native="true">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>10</y>
+        <x>0</x>
+        <y>40</y>
         <width>291</width>
         <height>71</height>
        </rect>
@@ -1402,7 +1511,7 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
          <property name="font">
           <font>
            <family>Microsoft YaHei UI</family>
-           <pointsize>14</pointsize>
+           <pointsize>11</pointsize>
            <italic>false</italic>
            <bold>false</bold>
           </font>
@@ -1420,63 +1529,85 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
      <widget class="QWidget" name="widget_7" native="true">
       <property name="geometry">
        <rect>
-        <x>760</x>
-        <y>-10</y>
+        <x>670</x>
+        <y>0</y>
         <width>331</width>
-        <height>121</height>
+        <height>101</height>
        </rect>
       </property>
-      <layout class="QGridLayout" name="gridLayout_8">
-       <item row="0" column="0">
-        <widget class="QLabel" name="order_info_label_4">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>订单信息操作：</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QPushButton" name="order_info_veritfyBtn_5">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string>修改订单</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="order_info_deleteBtn_6">
-         <property name="font">
-          <font>
-           <pointsize>10</pointsize>
-          </font>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="text">
-          <string>删除订单</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QLabel" name="order_info_label_4">
+       <property name="geometry">
+        <rect>
+         <x>70</x>
+         <y>40</y>
+         <width>112</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>Microsoft YaHei UI</family>
+         <pointsize>11</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 11pt &quot;Microsoft YaHei UI&quot;;</string>
+       </property>
+       <property name="text">
+        <string>订单信息操作：</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="order_info_veritfyBtn_5">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>40</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>批量修改</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="order_info_deleteBtn_6">
+       <property name="geometry">
+        <rect>
+         <x>180</x>
+         <y>70</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="text">
+        <string>批量删除</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QTableWidget" name="orderTabWidget_3">
       <property name="geometry">
        <rect>
-        <x>0</x>
+        <x>10</x>
         <y>100</y>
-        <width>1091</width>
+        <width>991</width>
         <height>391</height>
        </rect>
       </property>
@@ -1604,11 +1735,16 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
      <widget class="QPushButton" name="order_que_pushButton">
       <property name="geometry">
        <rect>
-        <x>610</x>
-        <y>20</y>
-        <width>101</width>
+        <x>300</x>
+        <y>50</y>
+        <width>141</width>
         <height>41</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>13</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true"/>
@@ -1624,8 +1760,8 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
      <rect>
       <x>10</x>
       <y>120</y>
-      <width>111</width>
-      <height>471</height>
+      <width>201</width>
+      <height>461</height>
      </rect>
     </property>
     <property name="font">
@@ -1636,53 +1772,69 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
     <property name="title">
      <string>MENU</string>
     </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="2" column="0">
-      <widget class="QPushButton" name="order_Btn">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>订单信息</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="flight_Btn">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>航班信息</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="passenger_Btn">
-       <property name="font">
-        <font>
-         <pointsize>12</pointsize>
-        </font>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="text">
-        <string>用户信息</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <widget class="QPushButton" name="order_Btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>171</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="text">
+      <string>订单信息</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="flight_Btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>70</y>
+       <width>171</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="text">
+      <string>航班信息</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="passenger_Btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>160</y>
+       <width>171</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
+     <property name="text">
+      <string>用户信息</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QPushButton" name="logout_pushButton">
     <property name="geometry">
@@ -1704,7 +1856,7 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
      <x>0</x>
      <y>0</y>
      <width>1239</width>
-     <height>31</height>
+     <height>36</height>
     </rect>
    </property>
   </widget>
