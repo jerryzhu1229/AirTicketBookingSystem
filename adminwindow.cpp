@@ -629,7 +629,7 @@ void AdminWindow::show_all_flight_info()
         //设置信号与槽
         connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_flight_info()));
         //设置第一列flight_code内容不可以编辑
-        ui->flightTabWidget_2->item(0,1)->setFlags(ui->flightTabWidget_2->item(0,1)->flags() & (~Qt::ItemIsEditable));
+        ui->flightTabWidget_2->item(i,1)->setFlags(ui->flightTabWidget_2->item(i,1)->flags() & (~Qt::ItemIsEditable));
 
     }
 }
@@ -685,8 +685,10 @@ void AdminWindow::show_all_passenage_info()
         ui->passenageTabWidget->setCellWidget(i, 6,save_delete_Btn);
         //设置信号与槽
         connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_passger_info()));
-        //设置第三列内容不可以编辑
-        ui->passenageTabWidget->item(0,3)->setFlags(ui->passenageTabWidget->item(0,3)->flags() & (~Qt::ItemIsEditable));
+        //设置第三、四列内容不可以编辑
+        ui->passenageTabWidget->item(i,3)->setFlags(ui->passenageTabWidget->item(i,3)->flags() & (~Qt::ItemIsEditable));
+        ui->passenageTabWidget->item(i,4)->setFlags(ui->passenageTabWidget->item(i,4)->flags() & (~Qt::ItemIsEditable));
+
     }
 }
 
@@ -751,7 +753,7 @@ void AdminWindow::show_all_order_info()
         //设置信号与槽
         connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_order_info()));
         //设置第一列内容不可以编辑
-        ui->orderTabWidget_3->item(0,1)->setFlags(ui->orderTabWidget_3->item(0,1)->flags() & (~Qt::ItemIsEditable));
+        ui->orderTabWidget_3->item(i,1)->setFlags(ui->orderTabWidget_3->item(i,1)->flags() & (~Qt::ItemIsEditable));
     }
 }
 //显示所有航班信息
@@ -839,9 +841,9 @@ void AdminWindow::passenage_tel_que()
             //设置信号与槽
             connect(save_delete_Btn,SIGNAL(clicked()),this,SLOT(delete_passger_info()));
 
-            //设置第三列内容不可以编辑
+            //设置第三、四列内容不可以编辑
             ui->passenageTabWidget->item(0,3)->setFlags(ui->passenageTabWidget->item(0,3)->flags() & (~Qt::ItemIsEditable));
-
+            ui->passenageTabWidget->item(0,4)->setFlags(ui->passenageTabWidget->item(0,3)->flags() & (~Qt::ItemIsEditable));
         } else {
             QMessageBox::warning(NULL, "提示", "未查询到该用户相关信息!");
             ui->tel_num_lineEdit->clear();
@@ -857,9 +859,9 @@ void AdminWindow::alter_passger_info()
     QString s_user_name = ui->passenageTabWidget->item(row,1)->text();
     QString s_user_code = ui->passenageTabWidget->item(row,2)->text();
     QString s_user_tel = ui->passenageTabWidget->item(row,3)->text();
-    QString s_user_pwd = ui->passenageTabWidget->item(row,4)->text();
+//    QString s_user_pwd = ui->passenageTabWidget->item(row,4)->text();
 
-    if(s_user_name.isEmpty()||s_user_code.isEmpty()||s_user_tel.isEmpty()||s_user_pwd.isEmpty()){
+    if(s_user_name.isEmpty()||s_user_code.isEmpty()||s_user_tel.isEmpty()){
         QMessageBox::about(NULL, "提示", "请填写完整信息!");
     }else{
         QMessageBox::StandardButton box;
@@ -867,14 +869,14 @@ void AdminWindow::alter_passger_info()
         if(box==QMessageBox::No)
             return;
         else{
-            QString str_password = ui->passenageTabWidget->item(row,4)->text();
-            QByteArray byte_password = str_password.toLatin1();
-            QByteArray byte_password_md5 = QCryptographicHash::hash(byte_password,QCryptographicHash::Md5);
-            QString strPwdMd5 = byte_password_md5.toHex();
-            QByteArray b_password_md5 = strPwdMd5.toLatin1();
-            char * c_password_md5 = b_password_md5.data();
-            QString str = QString("update user_info set u_name='%1', u_IDCard='%2', u_pwd='%3' where u_tel='%4'")
-                    .arg(s_user_name).arg(s_user_code).arg(c_password_md5).arg(s_user_tel);
+//            QString str_password = ui->passenageTabWidget->item(row,4)->text();
+//            QByteArray byte_password = str_password.toLatin1();
+//            QByteArray byte_password_md5 = QCryptographicHash::hash(byte_password,QCryptographicHash::Md5);
+//            QString strPwdMd5 = byte_password_md5.toHex();
+//            QByteArray b_password_md5 = strPwdMd5.toLatin1();
+//            char * c_password_md5 = b_password_md5.data();
+            QString str = QString("update user_info set u_name='%1', u_IDCard='%2' where u_tel='%3'")
+                    .arg(s_user_name).arg(s_user_code).arg(s_user_tel);
 
             QSqlQuery query;
             if(query.exec(str))
@@ -925,20 +927,20 @@ void AdminWindow::on_passenger_info_veritfyBtn_4_clicked()
                 if (rowCount ==1 ) {
                     byte_verifty_user_name = ui->passenageTabWidget->item(info_list.at(i),1)->text().toUtf8();
                     byte_verifty_user_code = ui->passenageTabWidget->item(info_list.at(i),2)->text().toUtf8();
-                    byte_verifty_user_pwd = ui->passenageTabWidget->item(info_list.at(i),4)->text().toUtf8();
+//                    byte_verifty_user_pwd = ui->passenageTabWidget->item(info_list.at(i),4)->text().toUtf8();
 
                     verifty_user_name = byte_verifty_user_name.data();
                     verifty_user_code = byte_verifty_user_code.data();
-                    verifty_user_pwd = byte_verifty_user_pwd.data();
+//                    verifty_user_pwd = byte_verifty_user_pwd.data();
 
-                    QString str_password = ui->passenageTabWidget->item(info_list.at(i),4)->text();
-                    QByteArray byte_password = str_password.toLatin1();
-                    QByteArray byte_password_md5 = QCryptographicHash::hash(byte_password,QCryptographicHash::Md5);
-                    QString strPwdMd5 = byte_password_md5.toHex();
-                    QByteArray b_password_md5 = strPwdMd5.toLatin1();
-                    char * c_password_md5 = b_password_md5.data();
-                    QString str = QString("update user_info set u_name='%1', u_IDCard='%2', u_pwd='%3' where u_tel='%4'")
-                            .arg(verifty_user_name).arg(verifty_user_code).arg(c_password_md5).arg(verifty_user_tel);
+//                    QString str_password = ui->passenageTabWidget->item(info_list.at(i),4)->text();
+//                    QByteArray byte_password = str_password.toLatin1();
+//                    QByteArray byte_password_md5 = QCryptographicHash::hash(byte_password,QCryptographicHash::Md5);
+//                    QString strPwdMd5 = byte_password_md5.toHex();
+//                    QByteArray b_password_md5 = strPwdMd5.toLatin1();
+//                    char * c_password_md5 = b_password_md5.data();
+                    QString str = QString("update user_info set u_name='%1', u_IDCard='%2' where u_tel='%3'")
+                            .arg(verifty_user_name).arg(verifty_user_code).arg(verifty_user_tel);
 
 
                     QSqlQuery query;

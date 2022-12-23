@@ -43,7 +43,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="flight_page_2">
      <widget class="QTableWidget" name="flightTabWidget_2">
@@ -1856,7 +1856,7 @@ background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #778899,stop:1 
      <x>0</x>
      <y>0</y>
      <width>1239</width>
-     <height>36</height>
+     <height>31</height>
     </rect>
    </property>
   </widget>
